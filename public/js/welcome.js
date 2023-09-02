@@ -153,19 +153,10 @@ $(document).ready(function () {
         });
     });
 });
+                          
 
 
 
-  $(document).ready(function() {
-    // Bắt sự kiện click vào hàng trong tbody
-    $('tbody tr').click(function() {
-         var laytextpolyline = $(this).find('td:eq(4)').text();
-         var doitextthanhjson = JSON.parse(laytextpolyline);
-       
-         var vitripolyline = L.polyline(doitextthanhjson, {color: 'red'}).addTo(map);
-         map.fitBounds(vitripolyline.getBounds());
-    });
-});
 
 
 function openCity(evt, cityName) {

@@ -127,23 +127,23 @@ class QuanLySatLoController extends Controller
         }
 
         //Thực hiện chuyển trang
-        return redirect('location');
+        return redirect()->back();
     }
 
     public function editLocation($madiadiem)
     {
-        $location = DB::select('SELECT * FROM diadiemsatlo WHERE madiadiem = ?', [$madiadiem]);
-
-        $xacu = DB::select('SELECT * FROM xa WHERE maxa = ?', [$location[0]->maxa]);
-
         $huyen = DB::table('huyen')->get();
 
         $hinhanhvideo = DB::table('diadiemsatlo')->selectRaw('DISTINCT hinhanh.hinhanh, video.video')->join('hinhanh', 'diadiemsatlo.madiadiem', '=', 'hinhanh.madiadiem')
             ->join('video', 'diadiemsatlo.madiadiem', '=', 'video.madiadiem')
             ->where('diadiemsatlo.madiadiem', $madiadiem)->get();
-        $getData = DB::table('diadiemsatlo')->join('xa', 'diadiemsatlo.maxa', '=', 'xa.maxa')
-            ->select('diadiemsatlo.maxa', 'xa.tenxa', 'diemcanhbao', 'mota', 'ghichu', 'dodai', 'shape', 'madiadiem')->where('madiadiem', $madiadiem)->get();
-        return view('admin.qlsl.editlocation',compact('location', 'xacu'))->with('edit', $getData)->with('hinh_video', $hinhanhvideo)->with('huyen', $huyen);
+
+        $getData = DB::table('diadiemsatlo')->join('xa', 'diadiemsatlo.maxa', '=', 'xa.maxa')->join('huyen', 'xa.mahuyen', '=', 'huyen.mahuyen')
+            ->select('diadiemsatlo.maxa', 'xa.tenxa','xa.mahuyen', 'tenhuyen', 'diemcanhbao', 'mota', 'ghichu', 'dodai', 'shape', 'madiadiem')->where('madiadiem', $madiadiem)->get();
+            
+        $xacu = DB::table('xa')->where('mahuyen',$getData[0]->mahuyen)->get();
+
+        return view('admin.qlsl.editlocation')->with('edit', $getData)->with('hinh_video', $hinhanhvideo)->with('huyen',$huyen)->with('xa',$xacu);
     }
 
     public function updateLocation(Request $request)
@@ -166,18 +166,10 @@ class QuanLySatLoController extends Controller
         $Diadiemsatlo->ghichu = $ghichu;
         $Diadiemsatlo->shape = $shape;
         $Diadiemsatlo->save();
-
-        
-       
+      
         
         if($request->hasFile('hinhanh')){
-            $Hinhanh = HinhAnh::where('madiadiem', $madiadiem)->get();
-            foreach ($Hinhanh as $hinhAnh) {
-                $tenHinh = $hinhAnh->hinhanh;
-                Storage::delete('hinhqlsl/' . $tenHinh);
-            }
-    
-            HinhAnh::where('madiadiem', $madiadiem)->delete();
+           
     
             foreach ($hinhanhs as $hinhanh) {
                 $id_hinhanh = rand(1, 1000);
@@ -189,6 +181,7 @@ class QuanLySatLoController extends Controller
                 $hinhAnh->madiadiem = $madiadiem;
                 $hinhAnh->id = $id_hinhanh;
                 $hinhAnh->save();
+                
             }
     
         }else{
@@ -198,19 +191,27 @@ class QuanLySatLoController extends Controller
             $Hinhanh->madiadiem = $madiadiem;
             $Hinhanh->id = $id_hinhanh;
             $Hinhanh->save();
+            HinhAnh::where('hinhanh',null)->delete();
         }
         
+        $id = rand(1, 10000);
+        // Kiểm tra xem id đã tồn tại trong cơ sở dữ liệu chưa
+        while (DB::table('video')->where('id', $id)->exists()) {
+            $id = rand(1, 10000);
+        }
+
+
         if($request->video) {
             $Video = Video::where('madiadiem', $madiadiem)->first();
             $Video->video = $videos;
             $Video->madiadiem = $madiadiem;
-            $Video->id = rand(1, 1000);
+            $Video->id = $id;
             $Video->save();
         }else{
             $Video = new Video();
             $Video->video = null;
             $Video->madiadiem = $madiadiem;
-            $Video->id =  rand(1, 1000);
+            $Video->id = $id;
             $Video->save();
         }
         
@@ -221,7 +222,7 @@ class QuanLySatLoController extends Controller
         } else {
             Toastr::error('Cập nhật không thành công', 'Thất bại');
         }
-        return redirect('location');
+        return redirect()->back();
     }
 
     public function destroy($madiadiem)
@@ -246,6 +247,31 @@ class QuanLySatLoController extends Controller
         }
 
         //Thực hiện chuyển trang
-        return redirect('/location');
+        return redirect()->back();
     }
+    public function image($madiadiem){
+        $hinh = DB::table('hinhanh')->join('diadiemsatlo', 'hinhanh.madiadiem', '=', 'diadiemsatlo.madiadiem')
+        ->join('xa', 'diadiemsatlo.maxa', '=', 'xa.maxa')->join('huyen', 'xa.mahuyen', '=', 'huyen.mahuyen')
+        ->select('hinhanh.*', 'huyen.tenhuyen', 'xa.tenxa')
+        ->where('hinhanh.madiadiem',$madiadiem)->get();
+        return view('admin.qlsl.image')->with('hinh',$hinh);
+    }
+
+    public function imageDelete($id){
+
+            $Hinhanh = HinhAnh::where('id', $id)->get();
+            foreach ($Hinhanh as $hinhAnh) {
+                $tenHinh = $hinhAnh->hinhanh;
+                Storage::delete('hinhqlsl/' . $tenHinh);
+            }
+           $hinh = HinhAnh::where('id', $id)->delete();
+            if ($hinh) {
+                Toastr::success('Đã xoá ảnh', 'Thành công');
+            } else {
+                Toastr::error('Xoá ảnh không thành công', 'Thất bại');
+            }
+            
+        return redirect()->back(); 
+    }
+
 }

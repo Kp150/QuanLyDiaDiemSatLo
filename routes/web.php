@@ -57,13 +57,16 @@ Route::get('/location', 'QuanLySatLoController@location' )->name('location');
 Route::get('/admin/qlsl/addlocation', 'QuanLySatLoController@shape');
 Route::get('/admin/qlsl/addlocation/{mahuyen}', 'QuanLySatLoController@getxa');
 Route::post('/admin/qlsl/addlocation', 'QuanLySatLoController@insertlocation');
-Route::get('/admin/qlsl/{madiadiem}/editlocation', 'QuanLySatLoController@editLocation');
+Route::get('/admin/qlsl/{madiadiem}/editlocation', 'QuanLySatLoController@editLocation')->name('editlocation');
 Route::post('/admin/qlsl/updatelocation', 'QuanLySatLoController@updateLocation');
 Route::get('/admin/qlsl/{madiadiem}/delete', 'QuanLySatLoController@destroy');
 
 
 Route::get('/admin/map', 'MapController@map')->name('map');
 Route::get('/admin/map', 'MapController@loadPolyline');
+Route::get('/admin/qlsl/{madiadiem}/image','QuanLySatLoController@image');
+Route::get('/admin/qlsl/{id}/imagedelete','QuanLySatLoController@imageDelete');
+
 
 
 
