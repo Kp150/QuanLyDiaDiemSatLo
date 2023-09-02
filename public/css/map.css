@@ -102,6 +102,7 @@ h3 {
     font-weight: bold;
 }
 
+<<<<<<< HEAD
 .flex-center{
     display: flex;
 }
@@ -109,7 +110,12 @@ h3 {
 
 .flex-center>h3{
     margin-right: 300px;
+=======
+.flex-center {
+    display: flex;
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
 }
+
 
 #logo {
     position: absolute;
@@ -156,7 +162,11 @@ select {
     position: absolute;
     z-index: 2;
     right: 0px;
+<<<<<<< HEAD
     bottom: 55px;
+=======
+    bottom: 60px;
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
     border-radius: 3px;
     left: 81.5%;
     opacity: 80%;
@@ -187,60 +197,72 @@ span {
 }
 
 .leaflet-popup-content {
-    width:auto !important;    
-    }
-  
-    .tab {
+    width: auto !important;
+}
+
+.tab {
     overflow: hidden;
-    
-  }
-  
-  /* Style the buttons inside the tab */
-  .tab button {
+
+}
+
+/* Style the buttons inside the tab */
+.tab button {
     background-color: inherit;
     float: left;
     border: none;
     outline: none;
     cursor: pointer;
-   
+
     transition: 0.3s;
     font-size: 15px;
-  }
-  
-  /* Change background color of buttons on hover */
-  .tab button:hover {
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
     background-color: #ddd;
-  }
-  
-  /* Create an active/current tablink class */
-  .tab button.active {
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
     background-color: #ccc;
-  }
-  
-  /* Style the tab content */
-  .tabcontent {
+}
+
+/* Style the tab content */
+.tabcontent {
     display: none;
     border: 1px solid #ccc;
     border-top: none;
     width: 410px;
     height: 329px;
     font-size: 12px;
-  }
- 
-  .tabcontent table{
+}
+
+.tabcontent table {
     width: 410px !important;
     height: 300px;
-  }
+}
 
-  .tabcontent th{
+.tabcontent th {
     width: 100px;
-  }
+}
 
+<<<<<<< HEAD
   .tabcontent tr{
     height: 20px ;
   }
 
   #image-dialog {
+=======
+.tabcontent tr {
+    height: 20px;
+}
+
+.carousel-item>img {
+    cursor: pointer;
+}
+
+#image-dialog {
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
     display: none;
     position: fixed;
     top: 0;
@@ -303,7 +325,11 @@ span {
     background-color: rgba(0, 0, 0, 0);
     color: white;
     border: 0;
+<<<<<<< HEAD
 }
 .carousel-item>img {
     cursor: pointer;
 }
+=======
+}
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352

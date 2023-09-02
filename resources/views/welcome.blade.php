@@ -55,7 +55,11 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+<<<<<<< HEAD
 <a class="dropdown-item" href="{{ route('profile') }}"
+=======
+                                        <a class="dropdown-item" href="{{ route('profile') }}"
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
                                             onclick="event.preventDefault();
                                         document.getElementById('info').submit();">
                                             {{ __('Thông Tin Cá Nhân') }}
@@ -93,9 +97,14 @@
                         </div>
                     @endif
                 </div>
+<<<<<<< HEAD
                 
                 <h3 id="tieude">HỆ THỐNG QUẢN LÝ ĐỊA ĐIỂM SẠT LỞ</h3>
                 
+=======
+
+                <h3 id="tieude">HỆ THỐNG QUẢN LÝ ĐỊA ĐIỂM SẠT LỞ</h3>
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
                 <button style="display: none" id="back" class="w3-button w3-teal w3-xlarge"><i
                         class="fa-solid fa-house fa-2xs"></i></button>
                 <button id="closeNav" class="w3-button w3-teal w3-xlarge" onclick="w3_close()"><i
@@ -106,7 +115,11 @@
                 <div class="leaflet-right-top">
                     <div class="logo">
                         <img id="logo" style="width: 80px; height: 80px; top: 7%"
+<<<<<<< HEAD
 src="{{ asset('img/Logo_tỉnh_Tiền_Giang.png') }}" alt="">
+=======
+                            src="{{ asset('img/Logo_tỉnh_Tiền_Giang.png') }}" alt="">
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
                     </div>
 
                     <div class="show-checkbox">
@@ -168,6 +181,18 @@ src="{{ asset('img/Logo_tỉnh_Tiền_Giang.png') }}" alt="">
                     </div>
                 </div>
 
+<<<<<<< HEAD
+=======
+                <div id="image-dialog" title="Ảnh phóng to">
+                    <img id="zoomed-image-dialog" src="" style="width: 600px; height: 419px;"> 
+                    <div class="img-button">
+                        <button onclick="prevImage()" id="prev"><i class="fa-solid fa-angle-left"></i></button>
+                        <button onclick="nextImage()" id="next"><i class="fa-solid fa-angle-right"></i></button>
+                        <button onclick="closeImageDialog()" id="exit" style="position: absolute; right: -245%;"><i class="fa-solid fa-x"></i></button>
+                    </div>
+                </div>
+
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
             </div>
         </div>
     </body>
@@ -175,9 +200,13 @@ src="{{ asset('img/Logo_tỉnh_Tiền_Giang.png') }}" alt="">
     <script>
         var polylines = [];
         var currentImages = [];
+<<<<<<< HEAD
 
         @foreach ($diadanh as $polyline)
         @if($polyline->shape)
+=======
+        @foreach ($diadanh as $polyline)
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
             var images = [];
             @php
                 $hinhanh = DB::select('SELECT * FROM hinhanh WHERE madiadiem =' . $polyline->madiadiem);
@@ -296,7 +325,11 @@ src="{{ asset('img/Logo_tỉnh_Tiền_Giang.png') }}" alt="">
                 '</table>' +
                 '</div>'
             '</div>';
+<<<<<<< HEAD
            
+=======
+
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
             var _polyline = L.polyline(coordinates, {
                 color: 'red'
             }).addTo(map).bindPopup($popupContent);
@@ -311,7 +344,10 @@ src="{{ asset('img/Logo_tỉnh_Tiền_Giang.png') }}" alt="">
                 //     madiadiem: {{ $item->madiadiem }}
                 // });
             @endforeach
+<<<<<<< HEAD
             @endif
+=======
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
         @endforeach
 
 
@@ -320,7 +356,11 @@ src="{{ asset('img/Logo_tỉnh_Tiền_Giang.png') }}" alt="">
             toggle.checked = true;
             toggle.addEventListener('click', function() {
                 polyline.setStyle({
+<<<<<<< HEAD
 opacity: toggle.checked ? 1 : 0
+=======
+                    opacity: toggle.checked ? 1 : 0
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
                 });
             });
         })
@@ -373,6 +413,79 @@ opacity: toggle.checked ? 1 : 0
         function closeImageDialog() {
             $("#image-dialog").hide();
         }
+<<<<<<< HEAD
+=======
+    </script>
+    <script>
+        var originalPolylines = [];
+
+        // Hàm khởi tạo các polyline ban đầu
+        function initPolylines() {
+
+            // Code khởi tạo các polyline 
+
+            originalPolylines = polylines;
+
+            // Lưu popup vào thuộc tính popup của mỗi polyline
+            originalPolylines.forEach(function(polyline) {
+                polyline.popup = $popupContent;
+
+            });
+
+            // Vẽ các polyline lên bản đồ
+            originalPolylines.forEach(function(polyline) {
+                console.log(polyline);
+                polyline.addTo(map);
+            });
+        }
+
+        function redrawPolylines() {
+
+            // Xóa các polyline cũ
+            map.eachLayer(function(layer) {
+                if (layer instanceof L.Polyline) {
+                    map.removeLayer(layer);
+                }
+            });
+
+            // Vẽ lại từ mảng ban đầu
+            originalPolylines.forEach(function(polyline) {
+                polyline.addTo(map)
+                    .bindPopup(polyline.popup);
+            });
+        }
+        //Thay đổi bản đồ
+        function changeBasemap(basemaps) {
+            var selectedBasemap = basemaps.value;
+            var mapUrl;
+
+            switch (selectedBasemap) {
+                case 'Streets':
+                    mapUrl = 'http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}';
+
+                    break;
+                case 'satellite':
+                    mapUrl = 'http://{s}.google.com/vt?lyrs=s,h&x={x}&y={y}&z={z}';
+
+                    break;
+                default:
+                    mapUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+                    break;
+            }
+
+            // Xóa bản đồ hiện tại và tạo bản đồ mới với URL tương ứng
+            map.eachLayer(function(layer) {
+                map.removeLayer(layer);
+            });
+
+            L.tileLayer(mapUrl, {
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            }).addTo(map);
+            redrawPolylines();
+        }
+        initPolylines();
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
     </script>
     <script>
        polylines.forEach(function(polyline){

@@ -9,7 +9,11 @@
 {{ Breadcrumbs::render('diadiemsatlo_list') }}
 @endsection
 @section('qlsl')
+<<<<<<< HEAD
 <a class="btn btn-app" href="{{ url('/location') }}"><i class="fa-solid fa-rotate-left" style="display: block; font-size: 20px;"></i>Quay lại</a>
+=======
+<a class="btn btn-app" href="{{ url()->previous() }}"><i class="fa-solid fa-rotate-left" style="display: block; font-size: 20px;"></i>Quay lại</a>
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
     </div>
 
     <!-- Main row -->
@@ -72,7 +76,11 @@
     <!-- /.content -->
     <script>
         function confirmDelete() {
+<<<<<<< HEAD
 return confirm("Bạn có chắc muốn xoá địa điểm này chứ?");
+=======
+            return confirm("Bạn có chắc muốn xoá địa điểm này chứ?");
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
         }
 
         // $(document).ready(function() {

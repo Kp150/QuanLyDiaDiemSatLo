@@ -33,6 +33,14 @@
                             </select>
                         </div>
                         <div class="form-group">
+<<<<<<< HEAD
+=======
+                            <label for="exampleInputtext1">Mã địa điểm <span style="color: red">*</span></label>
+                            <input name="madiadiem" type="number" class="form-control" id="exampleInputtext1"
+                                value="" required>
+                        </div>
+                        <div class="form-group">
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
                             <label for="exampleInputtext1">Điểm cảnh báo <span style="color: red">*</span></label>
                             <textarea name="diemcanhbao" class="form-control" rows="3" placeholder="Nhập ..." required></textarea>
                         </div>
@@ -50,15 +58,23 @@
                                 value="">
                         </div>
                         <div class="form-group">
+<<<<<<< HEAD
 <label for="exampleInputtext1">Shape</label>
+=======
+                            <label for="exampleInputtext1">Hình thể</label>
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
 
                             <input id="shapeInput" name="shape" type="text" class="form-control" id="exampleInputtext1"
                                 value="" readonly>
                         </div>
 
                         <div class="form-group">
+<<<<<<< HEAD
                             <label for="exampleInputtext1">Đường link video <span
                                     style="color: red">http://....</span></label>
+=======
+                            <label for="exampleInputtext1">Đường dẫn video</label>
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
 
                             <input id="video" name="video" type="url" class="form-control" id="exampleInputtext1"
                                 value="">
@@ -103,9 +119,14 @@
 
             $.get('/admin/qlsl/addlocation/' + mahuyen, function(data) {
 
+<<<<<<< HEAD
                 let html = '`<option value="">Chọn xã</option>`';
+=======
+                let html = '<option value="">Chọn xã</option>';
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
 
                 data.forEach(function(xa) {
+                    
                     html += `<option value="${xa.maxa}">${xa.tenxa}</option>`
                 });
 

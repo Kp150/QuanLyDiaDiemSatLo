@@ -60,9 +60,13 @@
                                     {{ __('Đăng Nhập') }}
                                 </button>
 
+<<<<<<< HEAD
                             
 
                                     <a class="btn btn-primary" href="{{url('/')}}" style="margin-left: 30px">
+=======
+                                    <a class="btn btn-back" href="{{url('/')}}" style="margin-left: 30px">
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
                                         {{__('Huỷ')}}
                                     </a>
                             </div>

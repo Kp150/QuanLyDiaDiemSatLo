@@ -24,6 +24,7 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
+                                <th>Mã địa điểm</th>
                                 <th>Huyện</th>
                                 <th>Xã</th>
                                 <th>Mô tả</th>
@@ -35,7 +36,9 @@
                             <tr>
                                 <td>{{ $key + 1}}</td>
 
-                                <td>{{ $list->tenhuyen}}</td>
+                                <td>{{ $list->madiadiem }}</td>
+
+                                <td>{{ $list->tenhuyen }}</td>
 
                                 <td>{{ $list->tenxa }}</td>
 
@@ -50,11 +53,15 @@
                                         class="btn btn-app" onclick="return confirmDelete()" href="/admin/qlsl/{{ $list->madiadiem}}/delete">
                                         <i class="fa-solid fa-user-xmark" style="display: block; font-size: 17px;"></i>Xoá
                                     </a>
+<<<<<<< HEAD
                                     <a style="font-size: 11px; height: 40px; min-width: 60px; padding:4px"
                                         class="btn btn-app" href="/admin/qlsl/{{ $list->madiadiem}}/image">
                                         <i class="fa-solid fa-image" style="display: block; font-size: 17px;"></i>Hình ảnh
                                     </a>
 
+=======
+                                    
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
                                 </td>
                             </tr>
                             @endforeach

@@ -193,8 +193,11 @@
                 <!-- SidebarSearch Form -->
                 <div class="form-inline">
                     <div class="input-group" data-widget="sidebar-search">
+<<<<<<< HEAD
                         
                      
+=======
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
                     </div>
                 </div>
 

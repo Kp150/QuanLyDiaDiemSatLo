@@ -7,6 +7,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 //End map
 
 
+
 //Các nút trên map
 function w3_open() {
     document.getElementById("main").style.marginLeft = "30%";
@@ -70,7 +71,10 @@ dienbiendb.addEventListener('change', function () {
     }
 });
 
+
+
 //Geojson checkbox Huyen
+<<<<<<< HEAD
 // var HuyenCheckbox = document.getElementById('huyen');
 // var huyenGeojsonLayer = null;
 // fetch('/Geojson/huyen.geojson')
@@ -106,10 +110,42 @@ dienbiendb.addEventListener('change', function () {
 //             }
 //         });
 //     });
+=======
+var HuyenCheckbox = document.getElementById('huyen');
+var huyenGeojsonLayer = null;
+fetch('/Geojson/huyen.geojson')
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        huyenGeojsonLayer = L.geoJSON(data, {
+            onEachFeature: function (feature, layer) {
+                    // Tạo và hiển thị popup 
+                    var popupContent = feature.properties.TenQuanHuyen; 
+                    layer.bindTooltip(popupContent, 
+                    {
+                        permanent: true, 
+                        direction: 'right',
+                        opacity : 0.8
+                    })
+            }
+            
+        });
+        HuyenCheckbox.addEventListener('change', function () {
+            if (HuyenCheckbox.checked) {
+                huyenGeojsonLayer.addTo(map);
+                map.fitBounds(huyenGeojsonLayer.getBounds());
+            } else {
+                map.removeLayer(huyenGeojsonLayer);
+            }
+        });
+    });
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
 // End Geojson checkbox Huyen
 
 
 // Geojson checkbox Xa
+<<<<<<< HEAD
 
 const change = () => {
 
@@ -143,6 +179,19 @@ const change = () => {
           permanent: true,
           direction: 'right',
           opacity: 0.8
+=======
+var XaCheckbox = document.getElementById('xa');
+var xaGeojsonLayer = null;
+fetch('/Geojson/xa.geojson')
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        xaGeojsonLayer = L.geoJSON(data, {
+            onEachFeature: function (feature, layer) { 
+
+            }
+>>>>>>> 9e5ebace7097a8993206f21233c7c3d35d346352
         });
       },
       style: function (feature) {
